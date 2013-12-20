@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: stocks
+#
+#  id         :integer          not null, primary key
+#  ticker     :string(255)
+#  name       :string(255)
+#  quantity   :integer
+#  price      :decimal(, )
+#  priceUnit  :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'spec_helper'
 
 describe Stock do

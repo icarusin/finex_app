@@ -6,4 +6,9 @@
         <h4><%= @stock.ticker %>, <%= @stock.quantity %>, <%= @stock.price %></h4>
     </section>
   </aside>
+  <div class="span8">
+    <% if @stock.stock_prices.any? %>
+      <h3>Stock Price variations (<%= @stock.stock_prices.count %>)</h3>
+    <% end %>
+  </div>
 </div>

@@ -15,6 +15,8 @@
 class Stock < ActiveRecord::Base
   attr_accessible :name, :price, :priceUnit, :quantity, :ticker
   
+  has_many :stock_prices
+  
   before_save {|stock| stock.ticker = ticker.upcase}
   
   validates :name, presence: true, length: {maximum: 255}

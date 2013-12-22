@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131220142724) do
+ActiveRecord::Schema.define(:version => 20131222121510) do
+
+  create_table "stock_prices", :force => true do |t|
+    t.integer  "stock_id"
+    t.datetime "transaction_time"
+    t.integer  "bid_id"
+    t.integer  "ask_id"
+    t.decimal  "price"
+    t.integer  "quantity"
+    t.integer  "price_unit"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "stock_prices", ["stock_id", "transaction_time"], :name => "index_stock_prices_on_stock_id_and_transaction_time"
 
   create_table "stocks", :force => true do |t|
     t.string   "ticker"

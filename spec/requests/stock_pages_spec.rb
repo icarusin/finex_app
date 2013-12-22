@@ -28,7 +28,7 @@ end
 
     before { visit add_path }
 
-    let(:submit) { "Add Stock" }
+    let(:submit) { "Add new stock" }
 
     describe "with invalid information" do
       it "should not create a stock" do

@@ -21,6 +21,7 @@ describe Stock do
 
   it {should respond_to(:name)}
   it {should respond_to(:ticker)}
+  it { should respond_to(:stock_prices) }
 
   it {should be_valid}
 
@@ -43,15 +44,30 @@ describe Stock do
     before {@stock.ticker = "a" * 300}
     it { should_not be_valid}
   end
-  
+
   describe "when ticker is already taken" do
     before do
       stock_with_same_ticker = @stock.dup
       stock_with_same_ticker.ticker = @stock.ticker.upcase
       stock_with_same_ticker.save
     end
-    
+
     it {should_not be_valid}
+  end
+
+  describe "stock price associations" do
+
+    before { @stock.save }
+    let!(:older_stock_price) do
+      FactoryGirl.create(:stock_price, stock: @stock, transaction_time: 5.hour.ago)
+    end
+    let!(:newer_stock_price) do
+      FactoryGirl.create(:stock_price, stock: @stock, transaction_time: 1.hour.ago)
+    end
+
+    it "should have the right stock prices in the right order" do
+      @stock.stock_prices.should == [older_stock_price, newer_stock_price]
+    end
   end
 
 end

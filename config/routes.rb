@@ -1,5 +1,5 @@
 FinexApp::Application.routes.draw do
-  get "stocks/new"
+  resources :stocks
 
   root to: 'static_pages#home'
 

@@ -1,3 +1,25 @@
-<% provide(:title, 'Add new Stock') %>
-<h1>Add a new Stock</h1>
-<p>This is where the new stock form will be added</p>
+<% provide(:title, 'Add new stock') %>
+<h1>Add new stock</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@stock) do |st| %>
+    
+    <%= render 'shared/error_messages' %>
+
+      <%= st.label :name %>
+      <%= st.text_field :name %>
+
+      <%= st.label :ticker %>
+      <%= st.text_field :ticker %>
+
+      <%= st.label :quantity %>
+      <%= st.text_field :quantity %>
+
+      <%= st.label :price %>
+      <%= st.text_field :price %>
+
+      <%= st.submit "Add new stock", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

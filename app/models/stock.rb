@@ -14,7 +14,9 @@
 
 class Stock < ActiveRecord::Base
   attr_accessible :name, :price, :priceUnit, :quantity, :ticker
-  
+
+  has_many :bids
+  has_many :asks  
   has_many :stock_prices
   
   before_save {|stock| stock.ticker = ticker.upcase}

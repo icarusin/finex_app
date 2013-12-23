@@ -1,9 +1,13 @@
 FinexApp::Application.routes.draw do
   resources :stocks
+  resources :bids
+  resources :asks
 
   root to: 'static_pages#home'
 
   match '/add',  to: 'stocks#new'
+  match '/buy',  to: 'bids#new'
+  match '/sell',  to: 'asks#new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

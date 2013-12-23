@@ -1,0 +1,22 @@
+<% provide(:title, 'Add new buy') %>
+<h1>Buy Stock</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@bid) do |bid| %>
+    
+    <%= render 'error_messages' %>
+
+      <%= bid.label :quantity %>
+      <%= bid.text_field :quantity %>
+
+      <%= bid.label :price %>
+      <%= bid.text_field :price %>
+      
+      <%= bid.label :stock_id %>
+	  <%= collection_select(:bid, :stock_id, Stock.all, :id, :name, {include_blank: 'Select Stock Name'}, {class: 'selectpicker'}) %>
+
+      <%= bid.submit "Place order", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

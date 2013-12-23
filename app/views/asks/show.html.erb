@@ -1,0 +1,9 @@
+<% provide(:title, @ask.stock.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+        <h1><%= @ask.stock.name%></h1>
+        <h4><%= @ask.stock.ticker %>, <%= @ask.quantity %>, <%= @ask.price %>, <%= @ask.created_at %></h4>
+    </section>
+  </aside>
+</div>

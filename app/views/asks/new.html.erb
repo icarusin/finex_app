@@ -1,0 +1,22 @@
+<% provide(:title, 'Add new ask') %>
+<h1>Sell Stock</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@ask) do |ask| %>
+    
+    <%= render 'error_messages' %>
+
+      <%= ask.label :quantity %>
+      <%= ask.text_field :quantity %>
+
+      <%= ask.label :price %>
+      <%= ask.text_field :price %>
+
+	  <%= ask.label :stock_id %>
+	  <%= collection_select(:ask, :stock_id, Stock.all, :id, :name, {include_blank: 'Select Stock Name'}, {class: 'selectpicker'}) %>
+	  
+      <%= ask.submit "Place order", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

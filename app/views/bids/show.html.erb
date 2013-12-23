@@ -1,0 +1,9 @@
+<% provide(:title, @bid.stock.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+        <h1><%= @bid.stock.name%></h1>
+        <h4><%= @bid.stock.ticker %>, <%= @bid.quantity %>, <%= @bid.price %>, <%= @bid.created_at %></h4>
+    </section>
+  </aside>
+</div>

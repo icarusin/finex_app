@@ -8,6 +8,10 @@ class StocksController < ApplicationController
     @stock = Stock.new
   end
   
+  def index
+     @stocks = Stock.all
+  end
+  
   def create
     @stock = Stock.new(params[:stock])
     if @stock.save

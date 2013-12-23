@@ -1,7 +1,7 @@
 class CreateBids < ActiveRecord::Migration
   def change
     create_table :bids do |t|
-      t.integer :stock_id
+      t.belongs_to :stock
       t.decimal :price
       t.integer :quantity
       t.integer :status

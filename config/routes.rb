@@ -5,6 +5,7 @@ FinexApp::Application.routes.draw do
 
   root to: 'static_pages#home'
 
+  match '/show',  to: 'stocks#index'
   match '/add',  to: 'stocks#new'
   match '/buy',  to: 'bids#new'
   match '/sell',  to: 'asks#new'

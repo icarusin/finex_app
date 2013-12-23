@@ -1,0 +1,10 @@
+<% provide(:title, 'Stock View') %>
+<h1>Show Stock Price Variations</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+         
+	  <%= collection_select(1, 1, Stock.all, :id, :name, {include_blank: 'Select Stock Name'}, {class: 'selectpicker', onchange: "window.location.href=document.URL + '/' + this.value"}) %>
+    
+  </div>
+</div>

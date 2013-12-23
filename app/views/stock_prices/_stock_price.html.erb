@@ -1,0 +1,7 @@
+<li>
+  <span class="content"><%= stock_price.price %></span>
+  <span class="content"><%= stock_price.quantity %></span>
+  <span class="timestamp">
+    <%= time_ago_in_words(stock_price.transaction_time) %> ago.
+  </span>
+</li>

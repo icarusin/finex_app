@@ -14,32 +14,38 @@ class BidAndAskResolver
       @askId = row[1]
       @stockId = row[2]
 
-      @stock = Stock.find(@stockId)
-
       ActiveRecord::Base.transaction do
         @bid = Bid.find(@bidId, lock: true)
         @ask = Ask.find(@askId, lock: true)
-        
+        @stock = Stock.find(@stockId, lock: true)
+
         @transactionQuantity = (@bid.quantity <= @ask.quantity) ? @bid.quantity : @ask.quantity
         @bid.quantity = @bid.quantity - @transactionQuantity;
         @ask.quantity = @ask.quantity - @transactionQuantity;
         if(@bid.quantity == 0)
-          @bid.status = 210
+        @bid.status = 210
         end
         if(@ask.quantity == 0)
-          @ask.status = 210
+        @ask.status = 210
         end
+
+        @stock.price = @bid.price;
+
+        @stock.save
         @bid.save
         @ask.save
-        @stockPrice = StockPrice.new
-        @stockPrice.ask_id = @askId
-        @stockPrice.bid_id =  @bidId
-        @stockPrice.price = @bid.price
-        @stockPrice.price_unit = 300
-        @stockPrice.transaction_time = Time.now
+
+        if(@transactionQuantity > 0)
+          @stockPrice = StockPrice.new
+          @stockPrice.ask_id = @askId
+          @stockPrice.bid_id =  @bidId
+          @stockPrice.price = @bid.price
+          @stockPrice.price_unit = 300
+          @stockPrice.transaction_time = Time.now
         @stockPrice.quantity = @transactionQuantity
         @stockPrice.stock = @stock
         @stockPrice.save
+        end
         Rails.logger.info @stock.name
       end
     end

@@ -7,5 +7,7 @@ class Bid < ActiveRecord::Base
   validates :quantity, presence: true  
   validates :stock_id, presence: true
   validates :status, presence: true
+  
+  default_scope order: 'bids.created_at DESC'
  
 end

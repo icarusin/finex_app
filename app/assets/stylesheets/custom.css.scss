@@ -202,3 +202,10 @@ aside {
     margin-bottom: 5px;
   }
 }
+
+.clear{
+    clear:both; 
+    height:0; 
+    line-height:0; 
+    font-size:0
+}

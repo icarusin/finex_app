@@ -1,0 +1,29 @@
+<% if ask.status == 200 %> 
+<div class="clear"></div>
+<div>
+	<div class="span1">
+		<%= ask.price %>
+	</div>
+	<div class="span1">
+		<%= ask.quantity %>
+	</div>
+	<div class="span3">
+		<%= time_ago_in_words(ask.created_at)%> ago.
+	</div>
+</div>
+<% end %>
+
+<% if ask.status == 210 %>
+<div class="clear"></div>
+<div style="background-color: #FF7171; color: #FFF; overflow: hidden;">
+	<div class="span1">
+		<%= ask.price %>
+	</div>
+	<div class="span1">
+		-
+	</div>
+	<div class="span3">
+		<%= time_ago_in_words(ask.created_at)%> ago.
+	</div>
+</div>
+<% end %>

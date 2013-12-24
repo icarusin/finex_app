@@ -10,6 +10,6 @@ class StockPrice < ActiveRecord::Base
   validates :transaction_time, presence: true
   validates :quantity, presence: true
   
-  default_scope order: 'stock_prices.transaction_time ASC'
+  default_scope order: 'stock_prices.transaction_time DESC'
   
 end

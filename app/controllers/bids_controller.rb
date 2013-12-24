@@ -13,7 +13,6 @@ class BidsController < ApplicationController
     @bid.status = 200
     @bid.price_unit = 300;
     if @bid.save
-      BidAndAskResolver.new(@bid.price).findMatches
       flash[:success] = "Bid created successfully!"
       redirect_to @bid
     else

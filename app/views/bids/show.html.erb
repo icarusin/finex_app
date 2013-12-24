@@ -1,9 +1,13 @@
 <% provide(:title, @bid.stock.name) %>
 <div class="row">
-  <aside class="span4">
-    <section>
-        <h1><%= @bid.stock.name%></h1>
-        <h4><%= @bid.stock.ticker %>, <%= @bid.quantity %>, <%= @bid.price %>, <%= @bid.created_at %></h4>
-    </section>
-  </aside>
+	<aside class="span12">
+		<section>
+			<h1><%= @bid.stock.name%></h1>
+			<h5>Bid placed for <%= @bid.stock.ticker %> for <%= @bid.quantity %> units at <%= @bid.price %> on <%= @bid.created_at %></h5>
+		</section>
+	</aside>
+</div>
+<div class="center">
+	<%= link_to "Buy", buy_path, class: "btn btn-large btn-primary" %>
+	<%= link_to "Sell", sell_path, class: "btn btn-large btn-primary" %>
 </div>

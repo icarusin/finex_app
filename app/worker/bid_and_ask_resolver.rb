@@ -1,10 +1,6 @@
 class BidAndAskResolver
-  def initialize(price)
-    @price = price
-  end
 
   def findMatches
-    return false unless (@price)
     @connection = ActiveRecord::Base.connection();
     @results = @connection.execute("select b.id, a.id, b.stock_id, b.created_at, a.created_at from bids b, asks a where b.stock_id = a.stock_id and b.price = a.price
                                    and b.status = 200 and a.status = 200 order by b.created_at, a.created_at ASC")
@@ -45,9 +41,23 @@ class BidAndAskResolver
         @stockPrice.quantity = @transactionQuantity
         @stockPrice.stock = @stock
         @stockPrice.save
+          Rails.logger.info "Saved matching bid/ask for" + @stock.name
+        else
+          Rails.logger.info "No matchings bid/ask for" + @stock.name  
         end
-        Rails.logger.info @stock.name
+        
+        Rails.logger.info "Task Run successfully"
       end
     end
   end
+  
+  def logStocks
+    @stocks = Stock.all
+    
+    @stocks.each do |st|
+      Rails.logger.info st.name + " is found"
+    end
+    
+  end
+  
 end

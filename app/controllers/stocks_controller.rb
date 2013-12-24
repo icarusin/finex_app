@@ -1,17 +1,35 @@
 class StocksController < ApplicationController
-  
   def show
     @stock = Stock.find(params[:id])
   end
-  
- def new
+
+  def new
     @stock = Stock.new
   end
-  
+
   def index
-     @stocks = Stock.all
+    @stocks = Stock.all
   end
-  
+
+  def prices
+    @stock = Stock.find(params[:id])
+    @stock_prices = @stock.stock_prices
+  end
+
+  def buys
+    @stock = Stock.find(params[:id])
+    @bids = @stock.bids
+  end
+
+  def sells
+    @stock = Stock.find(params[:id])
+    @asks = @stock.asks
+  end
+
+  def currentPrice
+    @stock = Stock.find(params[:id])
+  end
+
   def create
     @stock = Stock.new(params[:stock])
     if @stock.save

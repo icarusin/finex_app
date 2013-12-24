@@ -9,6 +9,10 @@ FinexApp::Application.routes.draw do
   match '/add',  to: 'stocks#new'
   match '/buy',  to: 'bids#new'
   match '/sell',  to: 'asks#new'
+  match '/stocks/:id/prices.js', to: 'stocks#prices'
+  match '/stocks/:id/buys.js', to: 'stocks#buys'
+  match '/stocks/:id/sells.js', to: 'stocks#sells'
+  match '/stocks/:id/currentPrice.js', to: 'stocks#currentPrice'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

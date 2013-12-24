@@ -2,36 +2,94 @@
 <div class="row">
 	<aside class="span4">
 		<section>
-			<h1><%= @stock.name%></h1>
-			<h4><%= @stock.ticker %>, <%= @stock.quantity %>, <%= @stock.price %></h4>
+			<h1><%= @stock.name%> ( <%= @stock.ticker %> ) </h1>
+			<div id="stockPrice">
+				<h4><%= @stock.price %></h4>
+			</div>
 		</section>
 	</aside>
 	<div class="span8">
 		<% if @stock.stock_prices.any? %>
-		<h3>Stock Price history (Number of transactions: <%= @stock.stock_prices.count %>)</h3>
-		<ol class="stock_prices">
-			<li>
+		<div class="span4">
+			<h3>Price Variation</h3>
+		</div>
+		<div class="clear"></div>
+		<div class="stock_prices">
+			<div>
 				<span class="span1">Price</span>
 				<span class="span1">Quantity</span>
 				<span class="timestamp">Transaction Time</span>
-			</li>
-			<%= render @stock.stock_prices %>
-		</ol>
+			</div>
+			<div id="prices">
+				<%= render @stock.stock_prices %>
+			</div>
+		</div>
 		<% end %>
+		<div class="clear" style="margin-bottom:30px;"></div>
 	</div>
-	<div class="clear"></div>
+	
 	<div class="span6" style="float:left">
-		<div class="span6">Bids Placed</div>
-		<div class="span1">Price</div>
-		<div class="span1">Quantity</div>
-		<div class="span3">Time</div>
-		<%= render @stock.bids %>
+		<div class="span6">
+			Bids Placed
+		</div>
+		<div class="span1">
+			Price
+		</div>
+		<div class="span1">
+			Quantity
+		</div>
+		<div class="span3">
+			Time
+		</div>
+		<div id="buys">
+			<%= render @stock.bids %>
+		</div>
 	</div>
 	<div class="span6" style="float:right">
-		<div class="span6">Asks Placed</div>
-		<div class="span1">Price</div>
-		<div class="span1">Quantity</div>
-		<div class="span3">Time</div>
-		<%= render @stock.asks %>
+		<div class="span6">
+			Asks Placed
+		</div>
+		<div class="span1">
+			Price
+		</div>
+		<div class="span1">
+			Quantity
+		</div>
+		<div class="span3">
+			Time
+		</div>
+		<div id="sells">
+			<%= render @stock.asks %>
+		</div>
 	</div>
 </div>
+ <script type="text/javascript">
+
+		$(document).ready(function() {
+			setInterval(function(){
+			$.get("/stocks/<%= @stock.id%>/prices.js", function(data){
+					$("#prices").html(data);
+				},"html")
+			}, 3000);
+
+		setInterval(function(){
+		$.get("/stocks/<%= @stock.id%>/buys.js", function(data){
+		$("#buys").html(data);
+		}, "html")
+		}, 3000);
+
+		setInterval(function(){
+		$.get("/stocks/<%= @stock.id%>/sells.js", function(data){
+		$("#sells").html(data);
+		}, "html")
+		}, 3000);
+		
+		setInterval(function(){
+		$.get("/stocks/<%= @stock.id%>/currentPrice.js", function(data){
+		$("#stockPrice").html(data);
+		}, "html")
+		}, 3000);
+		
+		
+		});
+</script>

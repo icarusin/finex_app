@@ -2,8 +2,7 @@ class BidAndAskResolver
 
   def findMatches
     @connection = ActiveRecord::Base.connection();
-    @results = @connection.execute("select b.id, a.id, b.stock_id, b.created_at, a.created_at from bids b, asks a where b.stock_id = a.stock_id and b.price = a.price
-                                   and b.status = 200 and a.status = 200 order by b.created_at, a.created_at ASC")
+    @results = @connection.execute(StockPrice::MATCH_BID_ASK_QUERY)
 
     @results.each do |row|
       @bidId = row[0]
